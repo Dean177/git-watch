@@ -1,0 +1,59 @@
+{
+  "name": "git-watch",
+  "version": "0.0.1",
+  "description": "Be notified when remote branches are updated",
+  "repository": "git@github.com:Dean177/git-watch.git",
+  "main": "dist/index.html",
+  "author": "Dean Merchant",
+  "license": "ISC",
+  "engines": {
+    "nwjs": "0.12.2"
+  },
+  "window": {
+    "icon": "app/images/icon.png",
+    "toolbar": true,
+    "frame": true,
+    "width": 1000,
+    "height": 700,
+    "position": "center",
+    "resizable": true
+  },
+  "webkit": {
+    "plugin": false
+  },
+  "scripts": {
+    "start": "watchify app/jsx/index.jsx -o app/bundle.js -v",
+    "test": "mocha",
+    "app": "nwbuild --run .",
+    "build": "./build/build",
+    "clean": "rm -rf build/cache app/bundle.js"
+  },
+  "dependencies": {
+    "del": "^1.2.0",
+    "envify": "^3.4.0",
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3",
+    "gulp-util": "^3.0.6",
+    "immutable": "^3.7.4",
+    "nodegit": "^0.4.1",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "react-skeleton": "Dean177/react-skeleton",
+    "redux": "^0.12.0",
+    "uniqueid": "^0.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel": "^5.6.14",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
+    "chai": "^3.0.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-mocha": "^2.1.2",
+    "loca": "^1.0.1",
+    "mocha": "^2.2.5",
+    "node-webkit-builder": "^1.0.12",
+    "watchify": "^3.2.3"
+  }
+}
