@@ -12,6 +12,7 @@
  Is working directory dirty?
  http://stackoverflow.com/questions/5143795/how-can-i-check-in-a-bash-script-if-my-local-git-repo-has-changes
  `git diff-index --quiet HEAD --;`
+https://github.com/nodegit/nodegit/blob/master/examples/status.js
  
  Are remote/local pointing at different commits & is remote ahead of local?
  (http://stackoverflow.com/questions/3258243/git-check-if-pull-needed)
