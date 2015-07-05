@@ -1,5 +1,5 @@
 # git-watch
-
+[![Circle CI](https://circleci.com/gh/Dean177/git-watch/tree/master.svg?style=svg)](https://circleci.com/gh/Dean177/git-watch/tree/master)
 [![dependency status](https://david-dm.org/dean177/git-watch.svg)](https://david-dm.org/dean177/git-watch)
 
 ## Installation
