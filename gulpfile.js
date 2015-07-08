@@ -49,9 +49,15 @@ gulp.task('assets', function() {
 });
 
 gulp.task('styles', function(){
-    gulp.src("app/styles/**/*.less")
-      .pipe(less({paths: ['app/styles/lib']}))
-      .on('error',errorHandler)
+    gulp
+      .src("app/styles/**/*.less")
+      .pipe(
+        less({paths: ['app/styles/lib']})
+          .on('error', function(err) => {
+            logError(err);
+            this.emit('end');
+          })
+      )
       .pipe(gulp.dest('dist'));
 
     gulp.src("app/styles/lib/**/*")

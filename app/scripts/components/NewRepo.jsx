@@ -2,19 +2,13 @@ var fs = nativeRequire('fs');
 
 import  React from 'react';
 import { Button, Row, Column, Form } from 'react-skeleton';
-import { RepositoryActions } from '../actions/RepositoryActions';
-import { getActionIds } from '../lib/redux-helpers';
+import * as RepoActionCreators from '../actions/RepositoryActions';
 
-
-const actions = getActionIds(RepositoryActions);
-console.log("actions:", JSON.stringify(actions));
-redux.dispatch(actions.newRepository("helloWorld"));
+store.dispatch(RepoActionCreators.new("Hello Path"));
 
 export default class NewRepo extends React.Component {
 
   onNewRepository(e) {
-
-
     e.preventDefault();
     const files = this.refs.fileInput.getDOMNode().files;
     if (!files[0]) {

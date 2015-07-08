@@ -1,10 +1,9 @@
-import { createActions } from '../lib/redux-helpers';
+import ActionTypes from './ActionTypes';
 
-export const RepositoryActions  = createActions({
-  newRepository(path) {
+export function newRepository(path) {
     return {
+      type: ActionTypes.Repository.new,
       path: path,
       date: Date.now()
     };
-  }
-});
+}
