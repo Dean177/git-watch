@@ -53,10 +53,7 @@ gulp.task('styles', function(){
       .src("app/styles/**/*.less")
       .pipe(
         less({paths: ['app/styles/lib']})
-          .on('error', function(err) => {
-            logError(err);
-            this.emit('end');
-          })
+          .on('error', errorHandler)
       )
       .pipe(gulp.dest('dist'));
 
@@ -78,8 +75,8 @@ function compileScripts(shouldWatchForChanges) {
     basedir: 'app/scripts',
     extensions: ['.jsx', '.js'],
     insertGlobals: false,
-    detectGlobals: false,
-    debug: true,
+    detectGlobals: true,
+    //debug: true,
     transforms: [],
     cache: {},
     packageCache: {},
@@ -87,9 +84,12 @@ function compileScripts(shouldWatchForChanges) {
   });
 
   bundler.transform(envify({NODE_ENV: 'development'}));
-  bundler.transform(
-      // Stage 1 allows for some proposed ES7 goodies: https://babeljs.io/docs/usage/experimental/
-      { global: false, stage: 1  }, babelify
+  bundler.transform({
+      stage: 1, // Stage 1 allows for some proposed ES7 goodies: https://babeljs.io/docs/usage/experimental/
+      global: false
+      //sourceMaps: true
+    },
+    babelify
   );
 
 

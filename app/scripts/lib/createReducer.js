@@ -2,13 +2,12 @@ import Immutable, { Map, List } from 'immutable';
 
 
 export default function createReducer(initialState, handlers) {
-  return (state = initialState, action) => {
+  return (state = initialState, action = null) => {
     if (!Map.isMap(state) && !List.isList(state)) {
       state = Immutable.fromJS(state);
     }
 
-    const handler = handlers(state, action);
-
+    const handler = handlers[action.type];
     if (!handler) {
       return state;
     }
@@ -21,5 +20,4 @@ export default function createReducer(initialState, handlers) {
 
     return newState;
   }
-
 }
