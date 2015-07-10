@@ -1,18 +1,6 @@
 "use strict";
-
+var fs = require('fs');
 var git = require("nodegit");
-
-var repoPath = "C:/Users/Dean/workspace/git-watch-test-repo";
-var remoteName = 'origin';
-var remoteMaster = 'master';
-
-pullLatestRemote(repoPath, remoteName, remoteMaster)
-  .then(function() {
-    console.log("repo up to date.");
-  })
-  .catch(function(err) {
-    console.error("error", err);
-  });
 
 function pullLatestRemote(repoPath, remoteName, remoteMaster) {
   var repository;

@@ -12,17 +12,22 @@ var source = require('vinyl-source-stream');
 
 gulp.task('default', ['watch']);
 
-gulp.task('test', ['test:browser']);
 
-gulp.task('test:browser', function() {
-  gulp
-    .src('tests/browser/**/*.spec.js', {read: false})
-    .pipe(mocha({
-      compilers: {
-        js: babel
-      },
-      reporter: 'nyan'
-    }));
+gulp.task('test', function() {
+  var mochaConfig = { compilers: { js: babel }, reporter: 'nyan' };
+  return gulp
+    .src('tests/**/*.spec.js', {read: false})
+    .pipe(mocha(mochaConfig));
+});
+
+gulp.task('test:junit', function() {
+  var mochaConfig = {
+    compilers: { js: babel },
+    reporter: 'mocha-junit-reporter'
+  };
+  return gulp
+    .src('tests/**/*.spec.js', {read: false})
+    .pipe(mocha(mochaConfig));
 });
 
 gulp.task('watch', function(done) {

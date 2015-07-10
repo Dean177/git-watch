@@ -23,14 +23,15 @@
   },
   "scripts": {
     "start": "watchify app/jsx/index.jsx -o app/bundle.js -v",
-    "test": "mocha",
+    "test": "node ./node_modules/gulp/bin/gulp.js test:junit",
     "app": "nwbuild --run .",
     "build": "./build/build",
-    "clean": "rm -rf build/cache app/bundle.js"
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "del": "^1.2.0",
     "envify": "^3.4.0",
+    "fs-extra": "^0.22.1",
     "gulp": "^3.9.0",
     "gulp-less": "^3.0.3",
     "gulp-util": "^3.0.6",
@@ -53,6 +54,7 @@
     "gulp-mocha": "^2.1.2",
     "loca": "^1.0.1",
     "mocha": "^2.2.5",
+    "mocha-junit-reporter": "^1.5.0",
     "node-webkit-builder": "^1.0.12",
     "watchify": "^3.2.3"
   }

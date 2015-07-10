@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 
-var PollRepositories = require('../../app/scripts/PollRepositories');
+console.log("Example tests");
 
-describe('placeholder', function(){
+describe('placeholder', function() {
   describe('poll', function() {
     var tester = 'o hai';
 
