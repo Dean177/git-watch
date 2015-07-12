@@ -38,7 +38,7 @@ class RepositoryStatus extends Component {
 
     return (
       <div key={repository.get('path')} className="RepositoryStatus">
-        <div className={classes}><i className="fa fa-circle-o"></i></div>
+        <div className={classes}></div>
         <div className="name">{ repositoryName }</div>
         <button onClick={onClickHandler}>Poll</button>
       </div>

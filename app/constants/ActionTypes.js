@@ -3,9 +3,10 @@ import keyMirror from 'keymirror'
 export default {
   Repository: keyMirror({
     new: null,
-    loading: null,
+    poll: null,
     update: null,
-    delete: null
+    delete: null,
+    error: null
   }),
   Navigation: keyMirror({
     routeChange: null

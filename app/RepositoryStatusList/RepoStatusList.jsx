@@ -4,6 +4,12 @@ import { connect } from 'redux/react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import RepositoryStatus from './components/RepositoryStatus';
 import pullLatestRemote from '../lib/PollRepositories';
+import * as RepoActionCreators from '../actions/RepositoryActions';
+
+
+//const fiveMinutes = 300000; //ms
+//var repositoryPoll = setInterval(() => {
+//}, fiveMinutes);
 
 
 @connect((state) => ({ repositories: state.get("repositories") }))
@@ -17,10 +23,18 @@ class RepositoryStatusList extends Component {
   };
 
   pollRepository(repository) {
-    pullLatestRemote(repository.get('path'), "origin", "master")
+    let repositoryPath = repository.get('path');
+    this.props.dispatch(RepoActionCreators.pollRepository(repositoryPath));
+
+    pullLatestRemote(repositoryPath, "origin", "master")
       .then(
-        () => { console.log("Completed success"); },
-        (error) => { console.log("fail", error); }
+        () => {
+          console.log("Pull succeed");
+          this.props.dispatch(RepoActionCreators.repositoryUpdated(repositoryPath));
+        },
+        (error) => {
+          console.log("Pull failed");
+          this.props.dispatch(RepoActionCreators.repositoryUpdateFailed(repositoryPath, error));}
       );
   }
 
