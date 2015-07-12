@@ -20,6 +20,7 @@ class AddRepo extends Component {
         // No directory has been selected
       } else {
         const path = files[0].path;
+        // TODO verify there is a git repo
         this.props.dispatch(RepoActionCreators.newRepository(path));
       }
     }
@@ -34,18 +35,14 @@ class AddRepo extends Component {
     return (
       <div>
         <h2>Add Repository</h2>
-        <Link to="repo-status">Cancel</Link>
+        <Link className="primary-link"to="repo-status">
+          <h4><i className="fa fa-arrow-left"></i></h4>
+        </Link>
 
         <form onSubmit= { this.onNewRepository }>
-          <div className="row">
-            <div className="six columns">
-              <label htmlFor="exampleEmailInput">Select repository location</label>
-              <input type="file" ref="fileInput" onChange={ this.onNewRepository }/>
-            </div>
-            <div className="six columns">
-              <button primary={true}>Go</button>
-            </div>
-          </div>
+          <label htmlFor="exampleEmailInput">Select repository location</label>
+          <input type="file" ref="fileInput" onChange={ this.onNewRepository }/>
+          <button primary={true}>Go</button>
         </form>
       </div>
     )

@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import ActionTypes from '../actions/ActionTypes';
+import ActionTypes from '../constants/ActionTypes';
 import createReducer from '../lib/createReducer';
 
 const initialState = Immutable.fromJS({});

@@ -38,10 +38,15 @@ class RepositoryStatusList extends Component {
     return (
       <div>
         <h2>Git Watch</h2>
-        <button className="button-primary"><Link className="button-primary"to="add-repo">ADD REPOSITORY</Link></button>
-        <ul className="RepositoryList">
-            { repositories }
-        </ul>
+        <Link className="primary-link" to="settings">
+          <h4><i className="fa fa-bars"></i></h4>
+        </Link>
+
+        <Link className="button-primary"to="add-repo">
+          <h4><i className="fa fa-plus"></i></h4>
+        </Link>
+
+        <div className="RepositoryList">{ repositories }</div>
       </div>
     );
   }

@@ -16,12 +16,26 @@ const globalInitialState =  Immutable.fromJS({
     "/home/dean/workspace/git-watch-test-repo": {
       "path":"/home/dean/workspace/git-watch-test-repo",
       "date":1436641325142,
-      "status":"updated"
+      "status": "ok",
+      "message": ""
+    },
+    "/home/dean/workspace/pool-ladder": {
+      "path": "/home/dean/workspace/pool-ladder",
+      "date":1436641841142,
+      "status": "warning",
+      "message": ""
     },
     "/home/dean/workspace/git-watch": {
       "path":"/home/dean/workspace/git-watch",
       "date":1436641841142,
-      "status": "message"
+      "status": "error",
+      "message": ""
+    },
+    "/home/dean/workspace/electron": {
+      "path":"/home/dean/workspace/electron",
+      "date":1436641841142,
+      "status": "loading",
+      "message": ""
     }
   }
 });
