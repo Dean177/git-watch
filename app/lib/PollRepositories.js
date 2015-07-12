@@ -1,30 +1,47 @@
-"use strict";
-var fs = require('fs');
-var git = require("nodegit");
+import fs from 'fs';
+import git from "nodegit";
 
-function pullLatestRemote(repoPath, remoteName, remoteMaster) {
+export default function pullLatestRemote(repoPath, remoteName, remoteMaster) {
+  console.log("clicked on", repoPath);
   var repository;
+  var remote = remoteName;
+  var remoteBranch = remoteMaster;
   return git.Repository.open(repoPath)
-    .then(function(repo) {
-      repository = repo;
-      console.log("Fetching...");
-      return fetchAll(repository);
+    .then(
+      function(repo) { return Promise.resolve(repository = repo); },
+      function(error) { return Promise.reject("Couldn't open local repository"); }
+    )
+    // TODO see if the latest remote commit is different from the local branch
+    .then(function() {
+      console.log("Checking if working directory is dirty");
+      return checkIfWorkingDirectoryIsDirty(repository);
     })
     .then(function() {
-      return checkIfWorkingDirectoryIsDirty(repository, remoteMaster, remoteName);
+      console.log("Checking if working directory is dirty");
+      return checkCurrentBranchIsRemote(repository, remoteBranch)
     })
     .then(function() {
-      return checkCurrentBranchIsRemote(repository, remoteMaster)
-    })
+        console.log("Fetching...");
+        return fetchAll(repository, remote);
+      })
     .then(function() {
-      return pullLatest(repository, remoteMaster, remoteName);
+      console.log("Pulling in changes");
+      return pullLatest(repository, remote, remoteBranch);
     })
 }
 
-function fetchAll(repository) {
-  return repository.fetch(remoteName, {
+export function fetchAll(repository, remote) {
+  return repository.fetch(remote, {
     credentials: function(url, userName) {
       return git.Cred.sshKeyFromAgent(userName);
+      // TODO allow credentials to be provided by app
+      //var sshPublicKey = fs(...)
+      //var sshPrivateKey = fs(...)
+      //return git.Cred.sshKeyNew(
+      //    userName,
+      //    sshPublicKey,
+      //    sshPrivateKey,
+      //    "");
     },
     certificateCheck: function() {
       return 1;
@@ -32,7 +49,7 @@ function fetchAll(repository) {
   });
 }
 
-function checkIfWorkingDirectoryIsDirty(repository) {
+export function checkIfWorkingDirectoryIsDirty(repository) {
   return repository.getStatus()
     .then(function(statuses) {
       function statusToText(status) {
@@ -50,7 +67,6 @@ function checkIfWorkingDirectoryIsDirty(repository) {
         var repositoryStatus = statuses.map(function(file) {
           return file.path() + " " + statusToText(file);
         });
-
         console.log("Status: ", repositoryStatus);
 
         return Promise.reject("Working directory is dirty");
@@ -60,34 +76,29 @@ function checkIfWorkingDirectoryIsDirty(repository) {
     });
 }
 
-function checkCurrentBranchIsRemote(repository, remoteBranchName) {
-  return repository.getCurrentBranch().then(function(ref) {
+export function checkCurrentBranchIsRemote(repository, remoteBranchName) {
+  return repository.getCurrentBranch().then((ref) => {
     var branchName = ref.name().substring('refs/heads/'.length);
 
     if (branchName != remoteBranchName) {
       // TODO save the current branch, checkout the branch to track and see if it can be pulled then rebase on it.
-      return Promise.reject("Not currently on the " + remoteMaster + " branch");
+      return Promise.reject("Not currently on the " + remoteBranchName + " branch");
     } else {
       return Promise.resolve();
     }});
 }
 
-function pullLatest(repository, branchName, remote) {
-  return repository.mergeBranches(branchName, remote + "/" + branchName).then(function() {
-    return Promise.resolve()
-  }, function() {
-    return Promise.reject("Failed to cleanly merge, local branch is either ahead or diverged");
-  });
+export function pullLatest(repository, remote, branchName) {
+  return repository.mergeBranches(branchName, remote + "/" + branchName)
+    .then(function() {
+      return Promise.resolve()
+    }, function() {
+      return Promise.reject("Failed to cleanly merge, local branch is either ahead or diverged");
+    });
 }
 
 
 //const fiveMinutes = 300000; //ms
 //var repositoryPoll = setInterval(() => {
-//
-//console.log("pollingRepositories");
-//var contents = JSON.parse(fs.readFileSync('./repositories.json', 'utf8'));
-//console.log("repos", contents.repositories);
-//Repository.open("")
-//
 //}, fiveMinutes);
 

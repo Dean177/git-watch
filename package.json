@@ -1,11 +1,10 @@
 {
-  "name": "electron-react-boilerplate",
-  "version": "0.2.7",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "git-watch",
+  "version": "0.0.1",
+  "description": "Watch git repositories for remote changes",
   "main": "main.js",
   "engine": {
-    "atom-shell": "0.29.2",
-    "iojs": "2.3.1"
+    "atom-shell": "0.28.3"
   },
   "scripts": {
     "test": "node ./node_modules/gulp/bin/gulp.js test:junit",
@@ -32,31 +31,25 @@
     "webpack"
   ],
   "dependencies": {
-    "debug": "^2.2.0",
-    "electron-debug": "^0.1.0",
-    "flux": "^2.0.3",
     "fs-extra": "^0.22.1",
     "immutable": "^3.7.4",
     "keymirror": "^0.1.1",
     "nodegit": "^0.4.1",
     "react": "^0.13.3",
+    "react-immutable-proptypes": "^1.0.0",
     "react-router": "^0.13.3",
     "redux": "^1.0.0-alpha",
     "uuid": "^2.0.1"
   },
   "devDependencies": {
-    "asar": "^0.6.1",
     "babel": "^5.6.14",
     "babel-core": "^5.4.2",
-    "babel-eslint": "^3.1.14",
     "babel-loader": "^5.1.2",
     "chai": "^3.0.0",
     "css-loader": "^0.12.1",
     "del": "^1.2.0",
     "electron-packager": "^4.1.0",
-    "electron-prebuilt": "^0.26.0",
-    "electron-rebuild": "^0.2.1",
-    "extract-text-webpack-plugin": "^0.8.0",
+    "electron-prebuilt": "^0.28.3",
     "file-loader": "^0.8.1",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.1.2",
@@ -66,7 +59,6 @@
     "json-loader": "^0.5.1",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
-    "markdown-loader": "^0.1.2",
     "minimist": "^1.1.1",
     "mocha": "^2.2.5",
     "mocha-junit-reporter": "^1.5.0",

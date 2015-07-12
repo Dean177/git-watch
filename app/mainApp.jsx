@@ -5,7 +5,6 @@ import { Provider } from 'redux/react';
 
 import Repository from './reducers/Repository';
 
-import debug from 'debug';
 import '!style!css!less!./styles/app.less';
 import routes from './routes/routes';
 import Router from 'react-router';
@@ -15,14 +14,14 @@ import Router from 'react-router';
 const globalInitialState =  Immutable.fromJS({
   "repositories": {
     "/home/dean/workspace/git-watch-test-repo": {
-      "path":"C:/Users/Dean/workspace/git-watch-test-repo",
+      "path":"/home/dean/workspace/git-watch-test-repo",
       "date":1436641325142,
       "status":"updated"
     },
     "/home/dean/workspace/git-watch": {
-      "type":"new",
       "path":"/home/dean/workspace/git-watch",
-      "date":1436641841142
+      "date":1436641841142,
+      "status": "message"
     }
   }
 });

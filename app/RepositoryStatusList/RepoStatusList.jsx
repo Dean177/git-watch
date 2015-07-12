@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'redux/react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import RepositoryStatus from './components/RepositoryStatus';
+import pullLatestRemote from '../lib/PollRepositories';
 
 
 @connect((state) => ({ repositories: state.get("repositories") }))
@@ -10,18 +12,27 @@ class RepositoryStatusList extends Component {
     store: React.PropTypes.object
   };
 
+  static propTypes: {
+    repositories: ImmutablePropTypes.map
+  };
+
   pollRepository(repository) {
-    console.log("clicked on", repository);
+    pullLatestRemote(repository.get('path'), "origin", "master")
+      .then(
+        () => { console.log("Completed success"); },
+        (error) => { console.log("fail", error); }
+      );
   }
 
 
   render() {
-    const repositories = this.props.repositories.toSeq().map((repository) => {
+    const repositories = this.props.repositories.toList().map((repository) => {
       return (
         <RepositoryStatus
             key={repository.get('path')}
             onClickHandler={this.pollRepository.bind(this, repository)}
-            repository={repository} />);
+            repository={repository} />
+      );
     });
 
     return (

@@ -3,7 +3,6 @@ var BrowserWindow = require('browser-window');
 var Menu = require('menu');
 var menu, template;
 
-require('electron-debug')();
 require('crash-reporter').start();
 
 var mainWindow = null;
