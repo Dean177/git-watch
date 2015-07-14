@@ -9,7 +9,7 @@ import Status from '../../constants/Status';
 class RepositoryStatus extends Component {
   static propTypes: {
     onClickHandler: React.PropTypes.func,
-    repository: React.PropTypes.object
+    repository: React.PropTypes.object.isRequired
   };
 
   getStatusColor(repository) {

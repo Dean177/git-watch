@@ -17,7 +17,7 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   target: 'atom',
-  externals: fs.readdirSync('node_modules').filter(function(x) { return x !== '.bin' }),
+  externals: fs.readdirSync('node_modules').filter(function(x) { return x !== '.bin'; }),
   module: {
     loaders: [
       { test: /\.html?$/, loader: 'html-loader' },
@@ -28,7 +28,7 @@ module.exports = {
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   },
-  devtool: 'eval',
+  devtool: 'source-map',
   debug: true,
   resolve: {
     root: path.join(__dirname, 'app'),

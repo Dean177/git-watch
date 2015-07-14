@@ -12,7 +12,7 @@ import * as RepoActionCreators from '../actions/RepositoryActions';
 //}, fiveMinutes);
 
 
-@connect((state) => ({ repositories: state.get("repositories") }))
+@connect((store) => ({ repositories: store.Repository }))
 class RepositoryStatusList extends Component {
   static contextTypes:  {
     store: React.PropTypes.object
@@ -38,14 +38,18 @@ class RepositoryStatusList extends Component {
       );
   }
 
+  pollAllRepositories() {
+    this.props.repositories.toList().forEach((r) => this.pollRepository(r));
+  }
 
   render() {
-    const repositories = this.props.repositories.toList().map((repository) => {
+
+    const repositoryStatus = this.props.repositories.toList().map((repository) => {
       return (
         <RepositoryStatus
-            key={repository.get('path')}
-            onClickHandler={this.pollRepository.bind(this, repository)}
-            repository={repository} />
+            key={ repository.get('path') }
+            onClickHandler={ this.pollRepository.bind(this, repository) }
+            repository={ repository } />
       );
     });
 
@@ -59,8 +63,8 @@ class RepositoryStatusList extends Component {
         <Link className="button-primary"to="add-repo">
           <h4><i className="fa fa-plus"></i></h4>
         </Link>
-
-        <div className="RepositoryList">{ repositories }</div>
+        <button onClick={ this.pollAllRepositories.bind(this) }>Check for updates</button>
+        <div className="RepositoryList">{ repositoryStatus }</div>
       </div>
     );
   }

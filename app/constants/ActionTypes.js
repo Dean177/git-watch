@@ -1,9 +1,9 @@
-import keyMirror from 'keymirror'
+import keyMirror from 'keymirror';
 
 export default {
   Repository: keyMirror({
     new: null,
-    poll: null,
+    loading: null,
     update: null,
     delete: null,
     error: null
@@ -11,4 +11,4 @@ export default {
   Navigation: keyMirror({
     routeChange: null
   })
-}
+};

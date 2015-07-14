@@ -1,10 +1,10 @@
-var del = require('del');
+var del =  require('del');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var mocha = require('gulp-mocha');
 var babel = require('babel/register');
 var webpack = require('webpack');
-var electron = require("gulp-run-electron");
+var shell = require("gulp-shell");
 var WebpackDevServer = require('webpack-dev-server');
 var webpackDevConfig = require('./webpack-dev.config');
 
@@ -28,14 +28,7 @@ gulp.task('test:junit', function() {
 
 gulp.task('start', ['webpack-server', 'start-dev']);
 
-gulp.task('start-dev', function() {
-  gulp.src('.').pipe(electron([], {
-    env: {
-      HOT: 1,
-      NODE_ENV: "development"
-    }
-  }));
-});
+gulp.task('start-dev', shell.task(['export HOT=1 NODE_ENV=development && electron .']));
 
 gulp.task('webpack-server', function() {
   // webpack-dev-server --config webpack-dev-server.config.js --hot --progress --colors --port 2992 --inline

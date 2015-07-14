@@ -11,17 +11,15 @@ export function newRepository(path) {
 
 export function pollRepository(path) {
   return {
-    type: ActionTypes.Repository.update,
-    path: path,
-    status: Status.loading
+    type: ActionTypes.Repository.loading,
+    path: path
   };
 }
 
 export function repositoryUpdated(path) {
   return {
     type: ActionTypes.Repository.update,
-    path: path,
-    status: Status.ok
+    path: path
   };
 }
 
@@ -32,4 +30,3 @@ export function repositoryUpdateFailed(path, error) {
     error: error
   };
 }
-
