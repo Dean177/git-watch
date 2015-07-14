@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { connect } from 'redux/react';
+import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import RepositoryStatus from './components/RepositoryStatus';
 import pullLatestRemote from '../lib/PollRepositories';

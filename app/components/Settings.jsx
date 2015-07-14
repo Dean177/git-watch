@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { connect } from 'redux/react';
+import { connect } from 'react-redux';
 import * as RepoActionCreators from '../actions/RepositoryActions';
 
 @connect((state) => ({ state: state }))

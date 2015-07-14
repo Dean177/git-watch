@@ -1,14 +1,12 @@
 import React from 'react';
 import Immutable from 'immutable';
-import { createStore, composeReducers } from 'redux';
-import { Provider } from 'redux/react';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
-import Repository from './reducers/Repository';
-
+import * as reducers from './reducers/';
 import '!style!css!less!./styles/app.less';
 import routes from './routes/routes';
 import Router from 'react-router';
-
 
 // TODO read from Json file?;
 const globalInitialState =  Immutable.fromJS({
@@ -40,7 +38,8 @@ const globalInitialState =  Immutable.fromJS({
   }
 });
 
-const store = createStore(Repository, globalInitialState);
+const reducer = combineReducers(reducers);
+const store = createStore(reducer, globalInitialState);
 
 // we can create a router before 'running' it
 const router = Router.create({

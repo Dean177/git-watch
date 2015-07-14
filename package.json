@@ -37,8 +37,9 @@
     "nodegit": "^0.4.1",
     "react": "^0.13.3",
     "react-immutable-proptypes": "^1.0.0",
+    "react-redux": "^0.2.1",
     "react-router": "^0.13.3",
-    "redux": "^1.0.0-alpha",
+    "redux": "^1.0.0-rc",
     "uuid": "^2.0.1"
   },
   "devDependencies": {
@@ -50,6 +51,7 @@
     "del": "^1.2.0",
     "electron-packager": "^4.1.0",
     "electron-prebuilt": "^0.28.3",
+    "electron-rebuild": "^0.2.3",
     "file-loader": "^0.8.4",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.1.2",
