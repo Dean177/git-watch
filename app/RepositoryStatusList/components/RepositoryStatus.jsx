@@ -45,6 +45,7 @@ class RepositoryStatus extends Component {
         </div>
         <div className="status-row">
           <div className={classes}></div>
+          <span>DJM-AEPS-123</span>
           <span className="error-message">{ repository.getIn(['error', 'message']) }</span>
           <a className="actionlink" onClick={onClickHandler}>check now</a>
         </div>

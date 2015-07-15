@@ -90,14 +90,13 @@ export default createReducer(initialState, {
   },
 
   [ActionTypes.Repository.error](state, action) {
-    console.log("Repository updated failed", action);
     let status = getStatusFromError(action.error);
     let repository = {
       ...action,
-      date: Date.now(),
-      status
+      status: status,
+      date: Date.now()
     };
-
+    console.log("Repository updated failed", repository);
     return state.mergeIn([action.path], Immutable.fromJS(repository));
   },
 
@@ -109,8 +108,9 @@ export default createReducer(initialState, {
 
 function getStatusFromError(error) {
   switch (error.code) {
-    case Error.DirtyWorkingDirectory:
-    case Error.WrongBranch:
+    case Errors.DirtyWorkingDirectory:
+      return Status.warning;
+    case Errors.WrongBranch:
       return Status.warning;
     default:
       return Status.error;
