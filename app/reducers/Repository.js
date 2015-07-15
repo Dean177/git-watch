@@ -8,28 +8,52 @@ import createReducer from '../lib/createReducer';
 // TODO read from json file?
 const initialState = Immutable.fromJS({
     "/home/dean/workspace/git-watch-test-repo": {
-      "path":"/home/dean/workspace/git-watch-test-repo",
-      "date":1436641325142,
-      "status": "ok",
-      "message": ""
+      "path": "/home/dean/workspace/git-watch-test-repo",
+      "date": 1436997985724,
+      "status": "error",
+      "message": "",
+      "type": "error",
+      "error": {
+        "code": "AuthenticationError",
+        "message": "Couldn't fetch from remote, is ssh-agent running",
+        "details": {}
+      }
     },
     "/home/dean/workspace/pool-ladder": {
       "path": "/home/dean/workspace/pool-ladder",
-      "date":1436641841142,
-      "status": "warning",
+      "date": 1436997986210,
+      "status": "ok",
       "message": ""
     },
     "/home/dean/workspace/git-watch": {
-      "path":"/home/dean/workspace/git-watch",
-      "date":1436641841142,
+      "path": "/home/dean/workspace/git-watch",
+      "date": 1436997984670,
       "status": "error",
-      "message": ""
+      "message": "",
+      "type": "error",
+      "error": {
+        "code": "DirtyWorkingDirectory",
+        "message": "Working directory is dirty",
+        "details": [
+          ".jshintrc NEW",
+          "app/RepositoryStatusList/components/RepositoryStatus.jsx MODIFIED",
+          "app/RepositoryStatusList/RepoStatusList.jsx MODIFIED",
+          "app/styles/app.less MODIFIED",
+          "app/styles/colors.less MODIFIED"
+        ]
+      }
     },
     "/home/dean/workspace/electron": {
-      "path":"/home/dean/workspace/electron",
-      "date":1436641841142,
+      "path": "/home/dean/workspace/electron",
+      "date": 1436997984608,
       "status": "loading",
-      "message": ""
+      "message": "",
+      "type": "error",
+      "error": {
+        "code": "OpeningRepository",
+        "message": "Couldn't open local repository",
+        "details": {}
+      }
     }
 });
 
@@ -42,7 +66,7 @@ export default createReducer(initialState, {
       date: Date.now()
     };
 
-    return state.setIn(['repositories', action.path], Immutable.fromJS(repository));
+    return state.setIn([action.path], Immutable.fromJS(repository));
   },
 
   [ActionTypes.Repository.loading](state, action) {

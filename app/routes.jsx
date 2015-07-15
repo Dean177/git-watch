@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, DefaultRoute } from 'react-router';
-import RepoStatus from '../RepositoryStatusList/RepoStatusList';
-import AddRepo from '../components/AddRepository';
-import Settings from '../components/Settings';
-import RootTemplate from '../RootTemplate';
+import RepoStatus from './RepositoryStatusList/RepoStatusList';
+import AddRepo from './AddRepository';
+import Settings from './Settings';
+import RootTemplate from './RootTemplate';
 
 
 export default (

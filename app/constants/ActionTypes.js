@@ -8,6 +8,9 @@ export default {
     delete: null,
     error: null
   }),
+  AddRepo: keyMirror({
+    chooseDirectory: null
+  }),
   Navigation: keyMirror({
     routeChange: null
   })

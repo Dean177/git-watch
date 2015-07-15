@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import RepositoryStatus from './components/RepositoryStatus';
 import pullLatestRemote from '../lib/PollRepositories';
+import { ActionBar, Action } from '../shared/ActionBar';
 import * as RepoActionCreators from '../actions/RepositoryActions';
 
 
@@ -56,14 +57,15 @@ class RepositoryStatusList extends Component {
     return (
       <div>
         <h2>Git Watch</h2>
-        <Link className="primary-link" to="settings">
-          <h4><i className="fa fa-bars"></i></h4>
-        </Link>
 
-        <Link className="button-primary"to="add-repo">
-          <h4><i className="fa fa-plus"></i></h4>
-        </Link>
-        <button onClick={ this.pollAllRepositories.bind(this) }>Check for updates</button>
+        <ActionBar>
+          <Action to="add-repo"><i className="fa fa-plus"></i></Action>
+          <Action onClick={ this.pollAllRepositories.bind(this) }>
+            <i className="fa fa-refresh"></i>
+          </Action>
+          <Action to="settings"><i className="fa fa-bars"></i></Action>
+        </ActionBar>
+
         <div className="RepositoryList">{ repositoryStatus }</div>
       </div>
     );

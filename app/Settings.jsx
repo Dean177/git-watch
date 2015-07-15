@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { ActionBar, Action } from './shared/ActionBar';
 import { connect } from 'react-redux';
-import * as RepoActionCreators from '../actions/RepositoryActions';
+import * as RepoActionCreators from './actions/RepositoryActions';
 
 @connect((state) => ({ state: state }))
 class Settings extends Component {
   render() {
     return (
-      <div>
+      <div className="Settings">
         <h2>Settings</h2>
-        <Link className="primary-link"to="repo-status">
-          <h4><i className="fa fa-arrow-left"></i></h4>
-        </Link>
+        <ActionBar>
+          <Action to="repo-status"><i className="fa fa-arrow-left"></i></Action>
+        </ActionBar>
 
         <h5>Application State</h5>
         <pre>

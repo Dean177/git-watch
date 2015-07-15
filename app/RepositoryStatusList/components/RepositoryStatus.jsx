@@ -31,16 +31,23 @@ class RepositoryStatus extends Component {
 
   render() {
     let { repository, onClickHandler } = this.props;
-    let repositoryPathSplit = repository.get('path').split(path.sep);
+    let repoPath = repository.get('path');
+
+    let repositoryPathSplit = repoPath.split(path.sep);
     let repositoryName = repositoryPathSplit[repositoryPathSplit.length -1];
 
     let classes = classNames("statusCircle", this.getStatusColor(repository));
 
     return (
       <div key={repository.get('path')} className="RepositoryStatus">
-        <div className={classes}></div>
-        <div className="name">{ repositoryName }</div>
-        <button onClick={onClickHandler}>Poll</button>
+        <div>
+          <div className="name"><span className="repo-name">{ repositoryName }</span> <span className="path">{ repoPath }</span></div>
+        </div>
+        <div className="status-row">
+          <div className={classes}></div>
+          <span className="error-message">{ repository.getIn(['error', 'message']) }</span>
+          <a className="actionlink" onClick={onClickHandler}>check now</a>
+        </div>
       </div>
     );
   }

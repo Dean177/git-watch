@@ -8,10 +8,18 @@ body {
   margin: 0;
 }
 
-.primary-link {
+.ActionBar {
   position: absolute;
   top: 2em;
   right: 2em;
+  .Action {
+    padding-left: 1em;
+    display: inline-block;
+    font-size: 2.5em;
+  }
+}
+.primary-link {
+
 }
 
 input[type="file"] {
@@ -22,23 +30,22 @@ input[type="file"] {
 
 
 .spinner {
-  width: 50px;
-  height: 50px;
+  width: 1.5em;
+  height: 1.5em;
   border-radius: 100%;
-  margin: auto;
   border: 1px solid;
   animation: rotate 1.3s linear 0s infinite, color-bubble 3s linear 0s infinite;
 
   &:after {
     content: '';
     position: absolute;
-    width: 15px;
-    height: 15px;
+    width: 0.6em;
+    height: 0.6em;
     background: #fff;
     border-radius: 100%;
     animation: color-change 3s linear 0s infinite;
-    left: -5px;
-    top: 18px;
+    left: -0.2em;
+    top: 0.2em;
   }
 
   &:before {
@@ -47,11 +54,30 @@ input[type="file"] {
 }
 
 
+
 .RepositoryStatus {
+  border-top: solid 1px @grey;
+  border-top: solid 1px @grey;
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+  .name {
+    padding-bottom: 1em;
+    .path {
+      color: @grey;
+    }
+  }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+  }
+
   .statusCircle {
     display: inline-block;
-    width: 2.5em;
-    height: 2.5em;
+    margin-right: 1em;
+    width: 1.5em;
+    height: 1.5em;
     background-color: @color-primary-1;
     border-radius: 100%;
     &.blue { background-color: @blue; }
@@ -60,10 +86,11 @@ input[type="file"] {
     &.spinner { background-color: white; }
   }
 
-  .name {
-    padding: 1em;
+  .action-link {
     display: inline-block;
   }
+
+
 }
 
 

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import * as reducers from './reducers/';
 import '!style!css!less!./styles/app.less';
-import routes from './routes/routes';
+import routes from './routes';
 import Router from 'react-router';
 
 const reducer = combineReducers(reducers);
