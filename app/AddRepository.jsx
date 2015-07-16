@@ -12,12 +12,14 @@ class AddRepo extends Component {
 
   constructor() {
     super();
-    // TODO move this into a redux store.
+    // TODO move this into the store.
     this.state = {
       selectedDirectory: ""
     };
 
-    this.onFormSubmitted = () => {
+    this.onFormSubmitted = (event) => {
+      event.preventDefault();
+
       let path = this.state.selectedDirectory;
       if (path && path != "") {
         this.props.dispatch(RepoActionCreators.newRepository(path));
@@ -26,6 +28,7 @@ class AddRepo extends Component {
 
     this.onDirectorySelected = (event) => {
       event.preventDefault();
+
       const files = event.target.files;
       if (!files || !files[0]) {
         this.setState({selectedDirectory: ""});
@@ -35,8 +38,6 @@ class AddRepo extends Component {
         this.setState({ selectedDirectory });
       }
     };
-
-
   }
 
   componentDidMount() {

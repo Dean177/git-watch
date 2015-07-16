@@ -62,7 +62,7 @@ export default createReducer(initialState, {
     console.log("New repository added", action);
     let repository = {
       ...action,
-      status: Status.ok,
+      status: Status.new,
       date: Date.now()
     };
 
