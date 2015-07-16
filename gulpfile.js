@@ -3,11 +3,13 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var mocha = require('gulp-mocha');
 var babel = require('babel/register');
+var electron = require('gulp-electron');
 var webpack = require('webpack');
 var shell = require("gulp-shell");
 var WebpackDevServer = require('webpack-dev-server');
 var webpackDevConfig = require('./webpack-dev.config');
 
+var packageJson = require('./package.json');
 
 gulp.task('test', function() {
   var mochaConfig = { compilers: { js: babel }, reporter: 'nyan' };
@@ -43,4 +45,21 @@ gulp.task('webpack-server', function() {
     if (err) { console.log(err); }
     gutil.log('Listening at ' + webpackDevConfig.output.publicPath);
   });
+});
+
+gulp.task('package', function() {
+  gulp.src('.').pipe(electron({
+    src: '.',
+    packageJson: packageJson,
+    cache: './cache',
+    release: './release',
+    version: 'v0.29.2',
+    apm: './node_modules/atom-package-manager/bin/apm',
+    platformsSupport: ['win64-64', 'linux-x64'],
+    platformResources: {
+      win: {
+        'icon': 'app/images/icon.ico'
+      }
+    }
+  }))
 });

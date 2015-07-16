@@ -43,6 +43,7 @@
     "uuid": "^2.0.1"
   },
   "devDependencies": {
+    "atom-package-manager": "^1.0.1",
     "babel": "^5.6.14",
     "babel-core": "^5.4.2",
     "babel-loader": "^5.1.2",
@@ -54,6 +55,7 @@
     "electron-rebuild": "^0.2.3",
     "file-loader": "^0.8.4",
     "gulp": "^3.9.0",
+    "gulp-electron": "0.0.7",
     "gulp-mocha": "^2.1.2",
     "gulp-run-electron": "^1.2.1",
     "gulp-shell": "^0.4.2",

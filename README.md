@@ -26,7 +26,6 @@ gulp start
 ```
 
 ## Package
-// TODO set up the gulp task for this.
-```
+```bash
 gulp package
 ```
