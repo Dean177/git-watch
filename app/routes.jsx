@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, DefaultRoute } from 'react-router';
 import RepoStatus from './RepositoryStatusList/RepoStatusList';
-import AddRepo from './AddRepository';
+import AddRepo from './AddRepository/AddRepository';
 import Settings from './Settings';
 import RootTemplate from './RootTemplate';
 

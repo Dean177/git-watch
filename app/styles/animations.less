@@ -1,0 +1,113 @@
+@keyframes spinner-bubble {
+  from {
+    width: 10px;
+    height: 10px;
+    opacity: .8;
+  }
+  to {
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+  }
+}
+
+@keyframes color-bubble {
+  0% {
+    color: #009DDC;
+  }
+  16% {
+    color: #50B949;
+  }
+  50% {
+    color: #EE2D24;
+  }
+  84% {
+    color: #FEB825;
+  }
+  100% {
+    color: #009DDC;
+  }
+}
+
+@keyframes color-change {
+  0% {
+    background: #009DDC;
+  }
+  33% {
+    background: #50B949;
+  }
+  66% {
+    background: #EE2D24;
+  }
+  100% {
+    background: #FEB825;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateRct {
+  0% {
+    -ms-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    -ms-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    -ms-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
+@keyframes size {
+  from {
+    width: 70px;
+    height: 70px;
+  }
+  to {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@keyframes shadow {
+  from {
+    box-shadow: 0px 0 0 1px inset;
+  }
+  to {
+    box-shadow: 50px 0 0 1px inset;
+  }
+}
+
+@keyframes shadowSize {
+  0% {
+    box-shadow: 15px 0 0 0, 30px 0 0 0, 45px 0 0 0, 60px 0 0 0, 75px 0 0 0;
+  }
+  20% {
+    box-shadow: 15px 0 0 5px, 30px 0 0 0, 45px 0 0 0, 60px 0 0 0, 75px 0 0 0;
+  }
+  40% {
+    box-shadow: 15px 0 0 0, 30px 0 0 5px, 45px 0 0 0, 60px 0 0 0, 75px 0 0 0;
+  }
+  60% {
+    box-shadow: 15px 0 0 0, 30px 0 0 0, 45px 0 0 5px, 60px 0 0 0, 75px 0 0 0;
+  }
+  80% {
+    box-shadow: 15px 0 0 0, 30px 0 0 0, 45px 0 0 0, 60px 0 0 5px, 75px 0 0 0;
+  }
+  100% {
+    box-shadow: 15px 0 0 0, 30px 0 0 0, 45px 0 0 0, 60px 0 0 0, 75px 0 0 5px;
+  }
+}

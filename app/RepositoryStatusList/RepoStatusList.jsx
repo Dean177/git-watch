@@ -29,14 +29,9 @@ class RepositoryStatusList extends Component {
 
     pullLatestRemote(repositoryPath, "origin", "master")
       .then(
-        () => {
-          console.log("Pull succeed");
-          this.props.dispatch(RepoActionCreators.repositoryUpdated(repositoryPath));
-        },
-        (error) => {
-          console.log("Pull failed");
-          this.props.dispatch(RepoActionCreators.repositoryUpdateFailed(repositoryPath, error));}
-      );
+        () => { this.props.dispatch(RepoActionCreators.repositoryUpdated(repositoryPath)); },
+        (error) => { this.props.dispatch(RepoActionCreators.repositoryUpdateFailed(repositoryPath, error)); }
+    );
   }
 
   pollAllRepositories() {
@@ -44,7 +39,6 @@ class RepositoryStatusList extends Component {
   }
 
   render() {
-
     const repositoryStatus = this.props.repositories.toList().map((repository) => {
       return (
         <RepositoryStatus

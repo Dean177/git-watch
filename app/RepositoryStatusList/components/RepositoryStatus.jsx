@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import path from 'path';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import classNames from 'classnames';
-
 import Status from '../../constants/Status';
+import '!style!css!less!./RepositoryStatus.less';
 
 
 class RepositoryStatus extends Component {
@@ -39,13 +39,12 @@ class RepositoryStatus extends Component {
     let classes = classNames("statusCircle", this.getStatusColor(repository));
 
     return (
-      <div key={repository.get('path')} className="RepositoryStatus">
+      <div className="RepositoryStatus">
         <div>
-          <div className="name"><span className="repo-name">{ repositoryName }</span> <span className="path">{ repoPath }</span></div>
+          <div className="name"><span className="repo">{ repositoryName }</span> <span className="branch">DJM-AEPS-123</span> <span className="path">{ repoPath }</span></div>
         </div>
         <div className="status-row">
           <div className={classes}></div>
-          <span>DJM-AEPS-123</span>
           <span className="error-message">{ repository.getIn(['error', 'message']) }</span>
           <a className="actionlink" onClick={onClickHandler}>check now</a>
         </div>

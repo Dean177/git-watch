@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { ActionBar, Action } from './shared/ActionBar';
+import { ActionBar, Action } from '../shared/ActionBar';
+import DirectoryPicker from './DirectoryPicker';
 
 import { connect } from 'react-redux';
-import * as RepoActionCreators from './actions/RepositoryActions';
+import * as RepoActionCreators from '../actions/RepositoryActions';
+import * as AddRepoActions from '../actions/AddRepoActions';
 
-@connect((state) => ({ repositories: state.repositories }))
+
+@connect((state) => ({ AddRepoForm: state.AddRepoForm}))
 class AddRepo extends Component {
   static contextTypes:  {
     store: React.PropTypes.object
@@ -12,15 +15,11 @@ class AddRepo extends Component {
 
   constructor() {
     super();
-    // TODO move this into the store.
-    this.state = {
-      selectedDirectory: ""
-    };
 
     this.onFormSubmitted = (event) => {
       event.preventDefault();
 
-      let path = this.state.selectedDirectory;
+      let path = this.props.AddRepoForm.directory;
       if (path && path != "") {
         this.props.dispatch(RepoActionCreators.newRepository(path));
       }
@@ -31,21 +30,18 @@ class AddRepo extends Component {
 
       const files = event.target.files;
       if (!files || !files[0]) {
-        this.setState({selectedDirectory: ""});
+        this.props.dispatch(AddRepoActions.chooseDirectory(""));
       } else {
         const selectedDirectory = files[0].path;
         // TODO verify there is a git repo
-        this.setState({ selectedDirectory });
+        this.props.dispatch(AddRepoActions.chooseDirectory(selectedDirectory ));
       }
     };
   }
 
-  componentDidMount() {
-    // React will ignore custom attributes which aren't in its whitelist: https://github.com/facebook/react/issues/140
-    this.refs.fileInput.getDOMNode().setAttribute('webkitdirectory', "true");
-  }
 
   render() {
+    const selectedDirectory = this.props.AddRepoForm.get('directory');
     return (
       <div>
         <h2>Add Repository</h2>
@@ -54,11 +50,14 @@ class AddRepo extends Component {
         </ActionBar>
 
         <form onSubmit= { this.onFormSubmitted }>
-          <label htmlFor="exampleEmailInput">Select repository location</label>
-          <input className="directory-picker" type="file" ref="fileInput" onChange={ this.onDirectorySelected }/>
-          <button className="button-primary">Go</button>
+          <div className="row">
+            <DirectoryPicker label="Select repository location" onChange={ this.onDirectorySelected } />
+            <span>{ selectedDirectory }</span>
+          </div>
+          <div className="row">
+            <button className="button-primary">Go</button>
+          </div>
         </form>
-        <pre><code>{ JSON.stringify(this.state, null, 2) }</code></pre>
       </div>
     )
   }

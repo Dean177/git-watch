@@ -1,0 +1,67 @@
+@import '../../styles/animations';
+@import '../../styles/colors';
+
+.RepositoryStatus {
+  border-top: solid 1px @grey;
+  border-top: solid 1px @grey;
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+.name {
+    padding-bottom: 1em;
+  .path {
+      color: @grey;
+    }
+  }
+
+.status-row {
+  display: flex;
+  align-items: center;
+}
+
+.spinner {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 100%;
+    border: 1px solid;
+    animation: rotate 1.3s linear 0s infinite, color-bubble 3s linear 0s infinite;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 0.6em;
+      height: 0.6em;
+      background: #fff;
+      border-radius: 100%;
+      animation: color-change 3s linear 0s infinite;
+      left: -0.2em;
+      top: 0.2em;
+    }
+
+    &:before {
+      animation: spinner-bubble 1.3s linear 2s infinite;
+    }
+  }
+
+
+
+.statusCircle {
+  display: inline-block;
+  margin-right: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: @color-primary-1;
+  border-radius: 100%;
+  &.blue { background-color: @blue; }
+  &.orange { background-color: @orange; }
+  &.red { background-color: @red; }
+  &.spinner { background-color: white; }
+}
+
+.action-link {
+    display: inline-block;
+  }
+
+
+}
+
