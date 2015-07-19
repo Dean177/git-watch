@@ -110,7 +110,7 @@ export function getCurrentBranchName(repository) {
 }
 
 export function checkCurrentBranchIsRemote(branchName, remoteBranchName) {
-  console.log("Checking if current branch matches remote", branchName, remoteBranchName);
+  logger("Checking if current branch matches remote", branchName, remoteBranchName);
   if (branchName != remoteBranchName) {
     // TODO save the current branch, checkout the branch to track and see if it can be pulled then rebase on it.
     return Promise.reject(
