@@ -1,52 +1,57 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { Navigation } from 'react-router';
+import { Connector } from 'react-redux';
+
 import { ActionBar, Action } from '../shared/ActionBar';
 import DirectoryPicker from './DirectoryPicker';
 
-import { connect } from 'react-redux';
-import * as RepoActionCreators from '../actions/RepositoryActions';
-import * as AddRepoActions from '../actions/AddRepoActions';
 
+const AddRepo = React.createClass({
+  mixins:[Navigation],
 
-@connect((state) => ({ AddRepoForm: state.AddRepoForm}))
-class AddRepo extends Component {
-  static contextTypes:  {
-    store: React.PropTypes.object
-  };
+  contextTypes:  {
+    store: PropTypes.object.isRequired
+  },
 
-  constructor() {
-    super();
+  propTypes: {
+    AddRepoForm: PropTypes.object.isRequired,
+    newRepository: PropTypes.func.isRequired,
+    chooseDirectory: PropTypes.func.isRequired
+  },
 
-    this.onFormSubmitted = (event) => {
-      event.preventDefault();
+  onFormSubmitted: function(event) {
+    event.preventDefault();
 
-      let path = this.props.AddRepoForm.directory;
-      if (path && path != "") {
-        this.props.dispatch(RepoActionCreators.newRepository(path));
-      }
-    };
+    let path = this.props.AddRepoForm.get('directory');
+    if (path && path != "") {
+      this.props.newRepository(path);
+      this.transitionTo('repo-status');
+    } else {
+      console.error("No directory selected", path);
+    }
+  },
 
-    this.onDirectorySelected = (event) => {
-      event.preventDefault();
+  onDirectorySelected: function(event) {
+    event.preventDefault();
 
-      const files = event.target.files;
-      if (!files || !files[0]) {
-        this.props.dispatch(AddRepoActions.chooseDirectory(""));
-      } else {
-        const selectedDirectory = files[0].path;
-        // TODO verify there is a git repo
-        this.props.dispatch(AddRepoActions.chooseDirectory(selectedDirectory ));
-      }
-    };
-  }
+    const files = event.target.files;
+    if (!files || !files[0]) {
+      this.props.chooseDirectory("");
+    } else {
+      const selectedDirectory = files[0].path;
+      // TODO verify there is a git repo
+      this.props.chooseDirectory(selectedDirectory);
+    }
+  },
 
-
-  render() {
+  render: function() {
     const selectedDirectory = this.props.AddRepoForm.get('directory');
     return (
       <div>
         <h2>Add Repository</h2>
+
         <ActionBar>
-          <Action to="repo-status"><i className="fa fa-arrow-left"></i></Action>
+        <Action to="repo-status"><i className="fa fa-arrow-left"></i></Action>
         </ActionBar>
 
         <form onSubmit= { this.onFormSubmitted }>
@@ -58,9 +63,10 @@ class AddRepo extends Component {
             <button className="button-primary">Go</button>
           </div>
         </form>
+        <pre><code>{JSON.stringify(this.props, null, 2)}</code></pre>
       </div>
     )
   }
-}
+});
 
 export default AddRepo
