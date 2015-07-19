@@ -12,6 +12,6 @@ export default {
     chooseDirectory: null
   }),
   Navigation: keyMirror({
-    routeChange: null
+    locationChange: null
   })
 };

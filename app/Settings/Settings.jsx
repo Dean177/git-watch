@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ActionBar, Action } from './shared/ActionBar';
 import { connect } from 'react-redux';
-import * as RepoActionCreators from './actions/RepositoryActions';
+import { ActionBar, Action } from '../shared/ActionBar';
+import * as RepoActionCreators from '../actions/RepositoryActions';
 
 @connect((state) => ({ state: state }))
 class Settings extends Component {

@@ -22,7 +22,7 @@ module.exports = {
     loaders: [
       { test: /\.html?$/, loader: 'html-loader' },
       { test: /\.less$/, loader: "style!css!less" },
-      { test: /\.jsx?$/, loaders: [ 'react-hot', 'babel-loader?stage=1' ] },
+      { test: /\.jsx?$/, loaders: [ 'react-hot', 'babel-loader?stage=1' ],  includes: [path.join(__dirname, 'app'), path.join(__dirname, 'node_modules', 'react-router')] },
       { test: /\.json?$/, loader: 'json' },
       { test: /\.js?$/, loader: 'babel-loader?stage=1', include: path.join(__dirname, 'app') },
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
