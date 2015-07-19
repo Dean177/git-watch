@@ -34,6 +34,7 @@ export default function pullLatestRemote(repoPath, remoteName, remoteMaster) {
     .then(() => {  return fetchAll(repository, remote);  })
     .then(() => { return pullLatest(repository, remote, remoteBranch); })
     .then(() => { return Promise.resolve(localBranch); })
+    // TODO return the number of commits which have been pulled etc
     .catch((error) => {
       return Promise.reject({
         ...error,

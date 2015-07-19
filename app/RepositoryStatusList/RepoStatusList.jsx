@@ -54,9 +54,7 @@ class RepositoryStatusList extends Component {
 
         <ActionBar>
           <Action to="add-repo"><i className="fa fa-plus"></i></Action>
-          <Action onClick={ this.pollAllRepositories.bind(this) }>
-            <i className="fa fa-refresh"></i>
-          </Action>
+          <Action onClick={ this.pollAllRepositories.bind(this) }><i className="fa fa-refresh"></i></Action>
           <Action to="settings"><i className="fa fa-bars"></i></Action>
         </ActionBar>
 

@@ -41,13 +41,17 @@ class RepositoryStatus extends Component {
 
     return (
       <div className="RepositoryStatus">
+        <div class="actions">
+          <i className="fa fa-ellipsis-v" />
+          <i className="fa fa-refresh" onClickHandler></i>
+        </div>
         <div className="name">
-          <span className="repo">{ repositoryName }</span>: <span className="branch">{ branchName }</span> <span className="path">{ repoPath }</span> <i className="fa fa-ellipsis-v" />
+          <span className="repo">{ repositoryName }</span>: <span className="path">{ repoPath }</span>
         </div>
         <div className="status-row">
           <div className={ classes }></div>
+          { branchName && branchName.length > 0 ? <span className="branch"><i className="fa fa-code-fork"></i> { branchName } </span> : "" }
           <span className="error-message">{ repository.getIn(['error', 'message']) }</span>
-          <a className="actionlink" onClick={onClickHandler}>check now</a>
         </div>
       </div>
     );
