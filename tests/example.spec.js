@@ -1,7 +1,5 @@
 var expect = require('chai').expect;
 
-console.log("Example tests");
-
 describe('placeholder', function() {
   describe('poll', function() {
     var tester = 'o hai';
