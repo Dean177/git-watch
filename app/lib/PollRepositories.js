@@ -1,6 +1,9 @@
 import fs from 'fs';
 import git from "nodegit";
 import Errors from '../constants/RepositoryErrors';
+import debug from 'debug';
+
+const logger = debug('git-watch:lib:PollRepositories');
 
 class RepositoryError {
   constructor(code, message, details) {
@@ -11,42 +14,37 @@ class RepositoryError {
 }
 
 export default function pullLatestRemote(repoPath, remoteName, remoteMaster) {
-  console.log("clicked on", repoPath);
   var repository;
   var remote = remoteName;
   var remoteBranch = remoteMaster;
+  var localBranch;
+
   return git.Repository.open(repoPath)
     .then(
       (repo) => { return Promise.resolve(repository = repo); },
       (error) => {
-        console.log(error);
-        return Promise.reject(new RepositoryError(
-          Errors.OpeningRepository,
-          "Couldn't open local repository",
-          error
-        ));
+        return Promise.reject(new RepositoryError( Errors.OpeningRepository, "Couldn't open local repository", error ));
       }
     )
+    .then(getCurrentBranchName)
+    .then((branchName) => { return Promise.resolve(localBranch = branchName); })
     // TODO see if the latest remote commit is different from the local branch
-    .then(function() {
-      console.log("Checking if working directory is dirty");
-      return checkIfWorkingDirectoryIsDirty(repository);
+    .then(() => { return checkIfWorkingDirectoryIsDirty(repository); })
+    .then(() => {  return checkCurrentBranchIsRemote(repository, remoteBranch) })
+    .then(() => {  return fetchAll(repository, remote);  })
+    .then(() => { return pullLatest(repository, remote, remoteBranch); })
+    .then(() => { return Promise.resolve(localBranch); })
+    .catch((error) => {
+      return Promise.reject({
+        ...error,
+        branchName: localBranch
+      });
     })
-    .then(function() {
-      console.log("Checking if current branch matches remote");
-      return checkCurrentBranchIsRemote(repository, remoteBranch)
-    })
-    .then(function() {
-        console.log("Fetching...");
-        return fetchAll(repository, remote);
-      })
-    .then(function() {
-      console.log("Pulling in changes");
-      return pullLatest(repository, remote, remoteBranch);
-    })
+    ;
 }
 
 export function fetchAll(repository, remote) {
+  logger("Fetching...");
   return repository.fetch(remote, {
     credentials: function (url, userName) {
       return git.Cred.sshKeyFromAgent(userName);
@@ -64,17 +62,18 @@ export function fetchAll(repository, remote) {
     }
   }).then(
     () => {
-      console.log("Fetched remote branches");
+      logger("Fetched remote branches");
       return Promise.resolve();
     },
     (error) => {
-      console.log("Fetch error", error);
+      logger("Fetch error", error);
       return Promise.reject(new RepositoryError(Errors.AuthenticationError, "Couldn't fetch from remote, is ssh-agent running", error))
     }
   );
 }
 
 export function checkIfWorkingDirectoryIsDirty(repository) {
+  logger("Checking if working directory is dirty");
   return repository.getStatus()
     .then(function(statuses) {
       function statusToText(status) {
@@ -92,7 +91,7 @@ export function checkIfWorkingDirectoryIsDirty(repository) {
         var repositoryStatus = statuses.map(function(file) {
           return file.path() + " " + statusToText(file);
         });
-        console.log("Status: ", repositoryStatus);
+        logger("Status: ", repositoryStatus);
 
         return Promise.reject(new RepositoryError(
           Errors.DirtyWorkingDirectory,
@@ -104,28 +103,33 @@ export function checkIfWorkingDirectoryIsDirty(repository) {
     });
 }
 
-export function checkCurrentBranchIsRemote(repository, remoteBranchName) {
+export function getCurrentBranchName(repository) {
   return repository.getCurrentBranch().then((ref) => {
-    var branchName = ref.name().substring('refs/heads/'.length);
+    return Promise.resolve(ref.name().substring('refs/heads/'.length));
+  });
+}
 
-    if (branchName != remoteBranchName) {
-      // TODO save the current branch, checkout the branch to track and see if it can be pulled then rebase on it.
-      return Promise.reject(
-        new RepositoryError(Errors.WrongBranch, "Not currently on the " + remoteBranchName + " branch"));
-    } else {
-      return Promise.resolve();
-    }});
+export function checkCurrentBranchIsRemote(branchName, remoteBranchName) {
+  logger("Checking if current branch matches remote");
+  if (branchName != remoteBranchName) {
+    // TODO save the current branch, checkout the branch to track and see if it can be pulled then rebase on it.
+    return Promise.reject(
+      new RepositoryError(Errors.WrongBranch, "Not currently on the " + remoteBranchName + " branch"));
+  } else {
+    return Promise.resolve({ branchName });
+  }
 }
 
 export function pullLatest(repository, remote, branchName) {
+  logger("Pulling in changes");
   return repository.mergeBranches(branchName, remote + "/" + branchName)
     .then(
     () => {
-      console.log("Pull completed");
+      logger("Pull completed");
       return Promise.resolve()
     },
     (error) => {
-      console.log("Pull failed", error);
+      logger("Pull failed", error);
       return Promise.reject(new RepositoryError(
         Errors.MergeFail,
         "Failed to cleanly merge, local branch is either ahead or diverged",

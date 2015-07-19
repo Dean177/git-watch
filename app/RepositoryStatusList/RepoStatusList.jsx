@@ -29,7 +29,7 @@ class RepositoryStatusList extends Component {
 
     pullLatestRemote(repositoryPath, "origin", "master")
       .then(
-        () => { this.props.dispatch(RepoActionCreators.repositoryUpdated(repositoryPath)); },
+        (branchName) => { this.props.dispatch(RepoActionCreators.repositoryUpdated(repositoryPath, branchName)); },
         (error) => { this.props.dispatch(RepoActionCreators.repositoryUpdateFailed(repositoryPath, error)); }
     );
   }

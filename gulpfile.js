@@ -30,7 +30,7 @@ gulp.task('test:junit', function() {
 
 gulp.task('start', ['webpack-server', 'start-dev']);
 
-gulp.task('start-dev', shell.task(['export HOT=1 NODE_ENV=development && electron .']));
+gulp.task('start-dev', shell.task(['export DEBUG=git-watch:* HOT=1 NODE_ENV=development && electron .']));
 
 gulp.task('webpack-server', function() {
   // webpack-dev-server --config webpack-dev-server.config.js --hot --progress --colors --port 2992 --inline
@@ -42,7 +42,7 @@ gulp.task('webpack-server', function() {
     historyApiFallback: true,
     inline: true
   }).listen(3000, 'localhost', function (err, result) {
-    if (err) { console.log(err); }
+    if (err) { gutil(err); }
     gutil.log('Listening at ' + webpackDevConfig.output.publicPath);
   });
 });

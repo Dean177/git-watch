@@ -47,4 +47,6 @@ describe("PollRepositories", function() {
 
   it('should succeed when HEAD has non conflicting changes with the remote branch');
 
+  it('should return the branch name');
+
 });

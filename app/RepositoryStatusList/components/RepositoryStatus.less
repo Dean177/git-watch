@@ -7,19 +7,18 @@
   padding-top: 2em;
   padding-bottom: 2em;
 
-.name {
+  .name {
     padding-bottom: 1em;
-  .path {
-      color: @grey;
-    }
+    .repo, .branch { font-size: 1.1em; }
+    .path { color: @grey; }
   }
 
-.status-row {
-  display: flex;
-  align-items: center;
-}
+  .status-row {
+    display: flex;
+    align-items: center;
+  }
 
-.spinner {
+  .spinner {
     width: 1.5em;
     height: 1.5em;
     border-radius: 100%;
@@ -43,25 +42,21 @@
     }
   }
 
-
-
-.statusCircle {
-  display: inline-block;
-  margin-right: 1em;
-  width: 1.5em;
-  height: 1.5em;
-  background-color: @color-primary-1;
-  border-radius: 100%;
-  &.blue { background-color: @blue; }
-  &.orange { background-color: @orange; }
-  &.red { background-color: @red; }
-  &.spinner { background-color: white; }
-}
-
-.action-link {
+  .statusCircle {
     display: inline-block;
+    margin-right: 1em;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: @color-primary-1;
+    border-radius: 100%;
+    &.blue { background-color: @blue; }
+    &.orange { background-color: @orange; }
+    &.red { background-color: @red; }
+    &.spinner { background-color: white; }
   }
 
-
+  .action-link {
+    display: inline-block;
+  }
 }
 

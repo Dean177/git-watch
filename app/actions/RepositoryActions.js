@@ -16,17 +16,19 @@ export function pollRepository(path) {
   };
 }
 
-export function repositoryUpdated(path) {
+export function repositoryUpdated(path, branchName) {
   return {
     type: ActionTypes.Repository.update,
-    path: path
+    path,
+    branchName
   };
 }
 
 export function repositoryUpdateFailed(path, error) {
   return {
     type: ActionTypes.Repository.error,
-    path: path,
-    error: error
+    path,
+    branchName: error.branchName,
+    error
   };
 }

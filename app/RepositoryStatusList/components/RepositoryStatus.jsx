@@ -32,6 +32,7 @@ class RepositoryStatus extends Component {
   render() {
     let { repository, onClickHandler } = this.props;
     let repoPath = repository.get('path');
+    let branchName = repository.get('branchName');
 
     let repositoryPathSplit = repoPath.split(path.sep);
     let repositoryName = repositoryPathSplit[repositoryPathSplit.length -1];
@@ -40,11 +41,11 @@ class RepositoryStatus extends Component {
 
     return (
       <div className="RepositoryStatus">
-        <div>
-          <div className="name"><span className="repo">{ repositoryName }</span> <span className="branch">DJM-AEPS-123</span> <span className="path">{ repoPath }</span></div>
+        <div className="name">
+          <span className="repo">{ repositoryName }</span>: <span className="branch">{ branchName }</span> <span className="path">{ repoPath }</span> <i className="fa fa-ellipsis-v" />
         </div>
         <div className="status-row">
-          <div className={classes}></div>
+          <div className={ classes }></div>
           <span className="error-message">{ repository.getIn(['error', 'message']) }</span>
           <a className="actionlink" onClick={onClickHandler}>check now</a>
         </div>
