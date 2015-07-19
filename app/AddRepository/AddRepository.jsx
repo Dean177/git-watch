@@ -39,7 +39,7 @@ const AddRepo = React.createClass({
       this.props.chooseDirectory("");
     } else {
       const selectedDirectory = files[0].path;
-      // TODO verify there is a git repo
+      // TODO https://github.com/Dean177/git-watch/issues/2 verify there is a git repo
       this.props.chooseDirectory(selectedDirectory);
     }
   },

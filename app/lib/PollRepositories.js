@@ -28,13 +28,13 @@ export default function pullLatestRemote(repoPath, remoteName, remoteMaster) {
     )
     .then(getCurrentBranchName)
     .then((branchName) => { return Promise.resolve(localBranch = branchName); })
-    // TODO see if the latest remote commit is different from the local branch
+    // TODO https://github.com/Dean177/git-watch/issues/3 see if the latest remote commit is different from the local branch
     .then(() => { return checkIfWorkingDirectoryIsDirty(repository); })
     .then(() => {  return checkCurrentBranchIsRemote(localBranch, remoteBranch) })
     .then(() => {  return fetchAll(repository, remote);  })
     .then(() => { return pullLatest(repository, remote, remoteBranch); })
     .then(() => { return Promise.resolve(localBranch); })
-    // TODO return the number of commits which have been pulled etc
+    // TODO https://github.com/Dean177/git-watch/issues/4 return the number of commits which have been pulled etc
     .catch((error) => {
       return Promise.reject({
         ...error,
@@ -49,7 +49,7 @@ export function fetchAll(repository, remote) {
   return repository.fetch(remote, {
     credentials: function (url, userName) {
       return git.Cred.sshKeyFromAgent(userName);
-      // TODO allow credentials to be provided by app
+      // TODO https://github.com/Dean177/git-watch/issues/5 allow credentials to be provided by app
       //var sshPublicKey = fs(...)
       //var sshPrivateKey = fs(...)
       //return git.Cred.sshKeyNew(
@@ -113,7 +113,8 @@ export function getCurrentBranchName(repository) {
 export function checkCurrentBranchIsRemote(branchName, remoteBranchName) {
   logger("Checking if current branch matches remote", branchName, remoteBranchName);
   if (branchName != remoteBranchName) {
-    // TODO save the current branch, checkout the branch to track and see if it can be pulled then rebase on it.
+    // TODO https://github.com/Dean177/git-watch/issues/6
+    // save the current branch, checkout the branch to track and see if it can be pulled then rebase on it.
     return Promise.reject(
       new RepositoryError(Errors.WrongBranch, "Not currently on the " + remoteBranchName + " branch"));
   } else {
