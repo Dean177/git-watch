@@ -23,6 +23,7 @@ module.exports = {
       { test: /\.html?$/, loader: 'html-loader' },
       { test: /\.less$/, loader: "style!css!less" },
       { test: /\.jsx?$/, loaders: [ 'react-hot', 'babel-loader?stage=1' ] },
+      { test: /\.json?$/, loader: 'json' },
       { test: /\.js?$/, loader: 'babel-loader?stage=1', include: path.join(__dirname, 'app') },
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }

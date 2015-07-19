@@ -30,7 +30,7 @@ export default function pullLatestRemote(repoPath, remoteName, remoteMaster) {
     .then((branchName) => { return Promise.resolve(localBranch = branchName); })
     // TODO see if the latest remote commit is different from the local branch
     .then(() => { return checkIfWorkingDirectoryIsDirty(repository); })
-    .then(() => {  return checkCurrentBranchIsRemote(repository, remoteBranch) })
+    .then(() => {  return checkCurrentBranchIsRemote(localBranch, remoteBranch) })
     .then(() => {  return fetchAll(repository, remote);  })
     .then(() => { return pullLatest(repository, remote, remoteBranch); })
     .then(() => { return Promise.resolve(localBranch); })
@@ -110,7 +110,7 @@ export function getCurrentBranchName(repository) {
 }
 
 export function checkCurrentBranchIsRemote(branchName, remoteBranchName) {
-  logger("Checking if current branch matches remote");
+  console.log("Checking if current branch matches remote", branchName, remoteBranchName);
   if (branchName != remoteBranchName) {
     // TODO save the current branch, checkout the branch to track and see if it can be pulled then rebase on it.
     return Promise.reject(

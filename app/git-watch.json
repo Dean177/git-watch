@@ -1,0 +1,60 @@
+{
+  "Repository": {
+    "/home/dean/workspace/git-watch-test-repo": {
+      "path": "/home/dean/workspace/git-watch-test-repo",
+      "date": 1437327055781,
+      "status": "error",
+      "type": "error",
+      "error": {
+        "code": "AuthenticationError",
+        "message": "Couldn't fetch from remote, is ssh-agent running",
+        "details": {},
+        "branchName": "master"
+      },
+      "branchName": "master"
+    },
+    "/home/dean/workspace/pool-ladder": {
+      "path": "/home/dean/workspace/pool-ladder",
+      "date": 1437327055687,
+      "status": "error",
+      "type": "error",
+      "branchName": "master",
+      "error": {
+        "code": "AuthenticationError",
+        "message": "Couldn't fetch from remote, is ssh-agent running",
+        "details": {},
+        "branchName": "master"
+      }
+    },
+    "/home/dean/workspace/git-watch": {
+      "path": "/home/dean/workspace/git-watch",
+      "date": 1437327054736,
+      "status": "warning",
+      "type": "error",
+      "error": {
+        "code": "DirtyWorkingDirectory",
+        "message": "Working directory is dirty",
+        "details": [
+          ".jshintrc NEW",
+          "app/lib/PollRepositories.js MODIFIED"
+        ],
+        "branchName": "master"
+      },
+      "branchName": "master"
+    },
+    "/home/dean/workspace/electron": {
+      "path": "/home/dean/workspace/electron",
+      "date": 1437327054692,
+      "status": "error",
+      "type": "error",
+      "error": {
+        "code": "OpeningRepository",
+        "message": "Couldn't open local repository",
+        "details": {}
+      }
+    }
+  },
+  "AddRepoForm": {
+    "directory": ""
+  }
+}
