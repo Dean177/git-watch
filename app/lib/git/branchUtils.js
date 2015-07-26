@@ -1,25 +1,24 @@
 import { Repository } from 'nodegit';
-import path from 'path';
 
 
-export default function createAndCheckout(path, branchName) {
+export default function createAndCheckout(repoPath, branchName) {
   return Repository
-    .open(path)
+    .open(repoPath)
     .then((repository) => {
       return createBranch(repository, branchName)
-        .then((repo) => {
-          return repo.checkoutBranch(branchName, null);
+        .then(() => {
+          return repository.checkoutBranch(branchName, null);
         });
     });
 }
 
 export function createBranch(repository, branchName) {
     return repository.getHeadCommit().then((commit) => {
-      return repo.createBranch(
+      return repository.createBranch(
         branchName,
         commit,
         0,
-        repo.defaultSignature(),
+        repository.defaultSignature(),
         "Created new-branch on HEAD");
     });
 }

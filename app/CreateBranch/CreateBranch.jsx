@@ -4,7 +4,7 @@ import path from 'path';
 import { ActionBar, Action } from '../shared/ActionBar';
 import validateBranchName from '../lib/validateBranchName';
 import * as CreateBranchActions from '../actions/CreateBranchActions';
-import createCheckout from '../lib/git/branchUtils';
+import createAndCheckout from '../lib/git/branchUtils';
 
 @connect((store) => ({ form: store.CreateBranchForm, repositories: store.Repository }))
 class RepositoryStatusList extends Component {
@@ -36,7 +36,8 @@ class RepositoryStatusList extends Component {
       const branchName = this.props.form.get('branchName');
 
       Promise.all(selectedRepositories.map((repoPath) => {
-          return createCheckout(repoPath, branchName);
+          console.log(repoPath, branchName);
+          return createAndCheckout(repoPath, branchName);
         }))
         .then(() => {
           this.props.dispatch(CreateBranchActions.createdBranch());
