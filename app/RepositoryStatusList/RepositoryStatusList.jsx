@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import RepositoryStatus from './components/RepositoryStatus';
-import pullLatestRemote from '../lib/PollRepositories';
+import pullLatestRemote from '../lib/git/PollRepositories';
 import { ActionBar, Action } from '../shared/ActionBar';
 import * as RepoActionCreators from '../actions/RepositoryActions';
+import '!style!css!less!./RepositoryStatusList.less';
 
 
 //const fiveMinutes = 300000; //ms
 //var repositoryPoll = setInterval(() => {
 //}, fiveMinutes);
 
-
 @connect((store) => ({ repositories: store.Repository }))
 class RepositoryStatusList extends Component {
-  static contextTypes:  {
-    store: React.PropTypes.object
-  };
+  static contextTypes:  { store: PropTypes.object };
 
   static propTypes: {
     repositories: ImmutablePropTypes.map
@@ -49,16 +47,40 @@ class RepositoryStatusList extends Component {
     });
 
     return (
-      <div>
-        <h2>Git Watch</h2>
+      <div className="RepositoryStatusList">
+        <div className="main">
+          <h2>Git Watch</h2>
+          <div className="RepositoryList">{ repositoryStatus }</div>
+        </div>
 
-        <ActionBar>
-          <Action to="add-repo"><i className="fa fa-plus"></i></Action>
-          <Action onClick={ this.pollAllRepositories.bind(this) }><i className="fa fa-refresh"></i></Action>
-          <Action to="settings"><i className="fa fa-bars"></i></Action>
-        </ActionBar>
-
-        <div className="RepositoryList">{ repositoryStatus }</div>
+        <div className="sidebar">
+          <ActionBar>
+            <Action onClick={ this.pollAllRepositories.bind(this) }>
+              <i className="fa fa-refresh"></i>
+              <span className="label">Fetch</span>
+            </Action>
+            <Action to="add-repo">
+              <i className="fa fa-plus"></i>
+              <span className="label">Add</span>
+            </Action>
+            <Action to="checkout-branch">
+              <i className="octicon octicon-git-pull-request"></i>
+              <span className="label">Checkout</span>
+            </Action>
+            <Action to="create-branch">
+              <i className="octicon octicon-git-branch"></i>
+              <span className="label">Branch</span>
+            </Action>
+            <Action to="push-branch">
+              <i className="octicon octicon-cloud-upload"></i>
+              <span className="label">Push</span>
+            </Action>
+            <Action to="settings">
+              <i className="fa fa-cog"></i>
+              <span className="label">Settings</span>
+            </Action>
+          </ActionBar>
+        </div>
       </div>
     );
   }

@@ -14,6 +14,10 @@ export default createReducer(initialState, {
   [ActionTypes.AddRepo.chooseDirectory](state, action) {
     logger("Selected directory", action);
     return state.set("directory", action.path);
+  },
+
+  [ActionTypes.AddRepo.addedRepository](state, action) {
+    return initialState;
   }
 });
 

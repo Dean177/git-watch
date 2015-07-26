@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import path from 'path';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import classNames from 'classnames';
@@ -8,8 +8,8 @@ import '!style!css!less!./RepositoryStatus.less';
 
 class RepositoryStatus extends Component {
   static propTypes: {
-    onClickHandler: React.PropTypes.func,
-    repository: React.PropTypes.object.isRequired
+    onClickHandler: PropTypes.func,
+    repository: PropTypes.object.isRequired
   };
 
   getStatusColor(repository) {
@@ -41,12 +41,8 @@ class RepositoryStatus extends Component {
 
     return (
       <div className="RepositoryStatus">
-        <div class="actions">
-          <i className="fa fa-ellipsis-v" />
-          <i className="fa fa-refresh" onClickHandler></i>
-        </div>
         <div className="name">
-          <span className="repo">{ repositoryName }</span>: <span className="path">{ repoPath }</span>
+          <span className="repo">{ repositoryName }</span>: <span className="path">{ repoPath }</span> <a href="#"><i className="fa fa-refresh" onClickHandler={onClickHandler}></i></a>
         </div>
         <div className="status-row">
           <div className={ classes }></div>

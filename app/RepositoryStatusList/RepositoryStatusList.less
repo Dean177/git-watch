@@ -1,0 +1,62 @@
+@import '../styles/colors';
+
+html, body, #react-root, .RepositoryStatusList {
+  height: 100%;
+}
+
+.RepositoryStatusList {
+
+}
+
+.main {
+  margin-right: 8em;
+  float: left;
+}
+
+.sidebar {
+  width: 8em;
+  float: right;
+
+  margin-top: -2em;
+  margin-right: -2em;
+  padding-top: 2em;
+  height: 100%;
+  background-color: @primary;
+  color: white;
+
+  .ActionBar {
+    height: 100%;
+    position: relative;
+    top: auto;
+    right: auto;
+    display: flex;
+    flex-direction: column;
+
+
+    .Action {
+      margin: 0 auto 1em;
+      padding-left: 0;
+      display: inline-block;
+      font-size: 3em;
+      text-align: center;
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      .octicon {
+        margin: 0 auto;
+        font-size: 1em;
+      }
+      i {
+        display: block;
+      }
+      .label {
+        display: block;
+        font-size: 0.3em;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+
+}

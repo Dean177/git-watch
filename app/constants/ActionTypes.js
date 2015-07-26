@@ -8,9 +8,18 @@ export default {
     delete: null,
     error: null
   }),
+
   AddRepo: keyMirror({
-    chooseDirectory: null
+    chooseDirectory: null,
+    addedRepository: null
   }),
+
+  CreateBranch: keyMirror({
+    enterName: null,
+    selectRepository: null,
+    createdBranch: null
+  }),
+
   Navigation: keyMirror({
     routeChange: null
   })

@@ -1,9 +1,9 @@
 import fs from 'fs';
 import git from "nodegit";
-import Errors from '../constants/RepositoryErrors';
+import Errors from '../../constants/RepositoryErrors';
 import debug from 'debug';
 
-const logger = debug('git-watch:lib:PollRepositories');
+const logger = debug('git-watch:git:PollRepositories');
 
 class RepositoryError {
   constructor(code, message, details) {

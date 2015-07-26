@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Connector } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 
@@ -11,7 +11,7 @@ function select(state) { return { AddRepoForm: state.AddRepoForm}; }
 
 class AddRepoWrapper extends Component {
   static contextTypes:  {
-    store: React.PropTypes.object
+    store: PropTypes.object
   };
 
   render() {

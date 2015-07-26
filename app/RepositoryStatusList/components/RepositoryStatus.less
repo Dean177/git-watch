@@ -1,16 +1,19 @@
 @import '../../styles/animations';
 @import '../../styles/colors';
 
+
 .RepositoryStatus {
-  //border-top: solid 1px @grey;
-  //border-top: solid 1px @grey;
-  padding-top: 2em;
   padding-bottom: 2em;
 
   .name {
-    padding-bottom: 1em;
-    .repo, .branch { font-size: 1.1em; }
+    padding-bottom: 0.5em;
+    .repo { font-size: 1.1em; }
     .path { color: @grey; }
+  }
+
+  .branch {
+    font-weight: bold;
+    padding-right: 1em;
   }
 
   .status-row {
@@ -45,8 +48,8 @@
   .statusCircle {
     display: inline-block;
     margin-right: 1em;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.4em;
+    height: 1.4em;
     background-color: @color-primary-1;
     border-radius: 100%;
     &.blue { background-color: @blue; }
@@ -54,9 +57,4 @@
     &.red { background-color: @red; }
     &.spinner { background-color: white; }
   }
-
-  .action-link {
-    display: inline-block;
-  }
 }
-

@@ -33,7 +33,6 @@ gulp.task('start', ['webpack-server', 'start-dev']);
 gulp.task('start-dev', shell.task(['export DEBUG=git-watch:* HOT=1 NODE_ENV=development && electron .']));
 
 gulp.task('webpack-server', function() {
-  // webpack-dev-server --config webpack-dev-server.config.js --hot --progress --colors --port 2992 --inline
   new WebpackDevServer(webpack(webpackDevConfig), {
     publicPath: webpackDevConfig.output.publicPath,
     hot: true,
