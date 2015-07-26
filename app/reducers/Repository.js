@@ -34,6 +34,7 @@ export default createReducer({}, {
     let repositoryUpdate = {
       status: Status.ok,
       branchName: action.branchName,
+      error: {},
       date: Date.now()
     };
 
