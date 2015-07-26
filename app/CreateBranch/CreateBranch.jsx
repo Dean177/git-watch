@@ -34,10 +34,13 @@ class RepositoryStatusList extends Component {
     const selectedRepositories = this.props.form.get('selectedRepositories');
     if (errors.length == 0 && selectedRepositories.size > 0) {
       const branchName = this.props.form.get('branchName');
-      this.props.dispatch(CreateBranchActions.createdBranch());
-      selectedRepositories.forEach((repoPath) => {
-        console.log(branchName, selectedRepositories);
-      })
+
+      Promise.all(selectedRepositories.map((repoPath) => {
+          return createCheckout(repoPath, branchName);
+        }))
+        .then(() => {
+          this.props.dispatch(CreateBranchActions.createdBranch());
+        }, (error) => { console.error(error); });
     }
   }
 
