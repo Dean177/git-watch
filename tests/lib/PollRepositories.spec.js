@@ -2,7 +2,7 @@ var fs = require('fs-extra');
 var path = require('path');
 var expect = require('chai').expect;
 
-var PollRepositories = require('../app/lib/PollRepositories');
+var PollRepositories = require('../../app/lib/git/PollRepositories');
 
 
 describe("PollRepositories", function() {
